@@ -287,7 +287,9 @@ impl Options {
   pub(crate) fn bitcoin_rpc_client(&self, wallet: Option<String>) -> Result<Client> {
     let rpc_url = self.rpc_url(wallet);
 
-    let auth = self.auth()?;
+    // 允许连接token类 无用户和密码的rpc
+    // let auth = self.auth()?;
+    let auth = Auth::None;
 
     log::info!("Connecting to Bitcoin Core at {}", self.rpc_url(None));
 
